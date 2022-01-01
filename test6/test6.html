@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <title>定义文档内嵌脚本</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="小甲鱼，Web开发，HTML5，CSS3，Web编程教学">
+    <meta name="description" content="《零基础入门学习Web开发》案例演示~">
+    <meta name="author" content="李容宇">
+    <!-- 加入defer属性以后告诉浏览器延迟执行脚本获取，但是对文档内部脚本不起作用 -->
+    <script type="text/javascript" src="patch.js" defer></script>
+<body>
+    <p>我是谁？</p>
+    <p>我从哪里来？</p>
+    <p>我要到哪里去？</p>
+    <!-- 解析到JavaScript后自上向下对p元素内容进行逐个替换 -->
+    <!-- <script type="text/javascript" src="patch.js"></script> -->
+</body>
+</html>

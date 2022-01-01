@@ -1,0 +1,2 @@
+链接图标：favicon=favorite icon
+                16X16或32X32图ico图片文件
