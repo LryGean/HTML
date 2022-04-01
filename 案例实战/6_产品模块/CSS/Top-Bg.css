@@ -1,0 +1,19 @@
+.model .top {
+    width: 500px;
+    height: 500px;
+    background: url('../img/Redmi\ AirDots.png') no-repeat center top;
+    background-size: 100% auto;
+    text-align: center;
+}
+.model .top span {
+    display: inline-block;
+    color: white;
+    font-size: 14px;
+    width: 50px;
+    padding: 4px;
+    height: 25px;
+    line-height: 25px;
+    margin: 460px 10px 10px 425px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 28px;
+}

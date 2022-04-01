@@ -1,0 +1,69 @@
+.model .bottom {
+    width: 500px;
+    height: 80px;
+    line-height: 80px;
+    background-color: white;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 0;
+    overflow: hidden;
+}
+
+.model .bottom .a1 {
+    display: inline-block;
+    width: 50px;
+    height: 80px;
+    margin: 0 10px;
+    text-align: center;
+    text-decoration: none;    
+    color: rgba(0, 0, 0, 0.5);
+    font: 18px "Microsoft YaHei";
+    overflow: hidden;
+}
+.model .bottom .a1 img {
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+}
+.model .model .a1 p {
+    width: 30px;
+    height: 20px;
+    line-height: 20px;
+    float: left;
+    margin: 10px;
+}
+
+.model .bottom .a1:hover {
+    background-color: #ffaa8b;
+}
+
+.model .bottom span {
+    display: inline-block;
+    width: 280px;
+    height: 80px;
+    line-height: 80px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.model .bottom span a:first-child,.model .bottom span a:last-child {
+    display: inline-block;
+    width: 140px;
+    height: 50px;
+    line-height: 50px;
+    margin-top: 15px;
+    font-size: 25px;
+    text-decoration: none;
+    color: white;
+}
+
+/* .model .bottom span a:hover {
+    background-color: #ffaa8b;
+} */
+.model .bottom span a:first-child {
+    border-top-left-radius: 28px;
+    border-bottom-left-radius: 28px;
+}
+.model .bottom span a:last-child {
+    border-top-right-radius: 28px;
+    border-bottom-right-radius: 28px;
+}
