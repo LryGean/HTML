@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="李容宇">
+    <title>会员注册</title>
+    <link rel="icon" href="../images/头像.ico">
+    <style>
+        table {
+            margin-left:auto;
+            margin-right: auto;
+            margin-top: 10px;
+            width: 700px;
+            color: blueviolet;
+        }
+        table th {
+            border: 1px solid black;
+            
+            font-size: 32px;
+        }
+        table tr td {
+            border: 1px solid black;
+            font-size: 32px;
+        }
+        .one {
+            border-width: 1px;
+            width: 15%;
+            font-size: 16px;
+            text-align: center;
+        }
+        .two {
+            border-width: 1px;
+            width: 85%;
+            font-size: 16px;
+            text-align: left;
+        }
+    </style>
+    <style>
+        input::placeholder {
+            font-size: 16px;
+            color: blueviolet;
+        }
+        img {
+            margin-top: 2px;
+        }
+        #num {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <form action="https://www.baidu.com" method="get">
+        <table width="500px" height="144px" cellpadding="0" cellspacing="0">
+            <tr>
+                <th colspan="2">
+                    会员注册&nbsp;&nbsp;USER&nbsp;REGISTER
+                </th>
+            </tr>
+            <tr>
+                <td class="one"><label for="username">用户名：</label></td>
+                <td class="two">
+                    <input type="text" name="username" maxlength="8" placeholder="请输入用户名" id="username">
+                </td>
+            </tr>
+            <tr>
+                <td class="one"><label for="pw1">密码：</label></td>
+                <td class="two">
+                    <input type="password" name="pw" placeholder="请输入密码" id="pw1">
+                </td>
+            </tr>
+            <tr>
+                <td class="one"><label for="pw2">确认密码：</td>
+                <td class="two">
+                    <input type="password" name="pw" placeholder="请确认密码" id="pw2" onkeyup="validate()">
+                    <span id="tishi"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="one"><label for="e-mail">E-mail</label></td>
+                <td class="two"><input type="email" name="e-mail" placeholder="请输入邮箱" id="e-mail"></td>
+            </tr>
+            <tr>
+                <td class="one"><label for="name">姓名：</td>
+                <td class="two"><input type="text" name="name" maxlength="4" placeholder="请输入姓名" id="name"></td>
+            </tr>
+            <tr>
+                <td class="one"><label for="sex">性别：</label></td>
+                <td class="two">
+                    <input type="radio" name="sex" value="男" checked="checked" id="sex">男&nbsp;&nbsp;
+                    <input type="radio" name="sex" value="女" id="sex">女
+                </td>
+            </tr>
+            <tr>
+                <td class="one"><label for="birth">出生日期：</label></td>
+                <td class="two">
+                    <input type="date" name="birth" placeholder="请填写出生日期" id="birth">
+                </td>
+            </tr>
+            <tr>
+                <td class="one"><label for="num">验证码：</label></td>
+                <td class="two">
+                    <input type="text" name="num" placeholder="请输入验证码" id="num">&nbsp;&nbsp;
+                    <img src="验证码.webp" alt="验证码" width="64px" height="18px">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="提交">
+                </td>
+            </tr>
+        </table>
+    </form>
+    <script>
+        function validate() {
+            var pw1 = document.getElementById("pw1").value;
+            var pw2 = document.getElementById("pw2").value;
+            if(pw1 == pw2) {
+                document.getElementById("tishi").innerHTML="<font color='green'>两次密码相同</font>";
+                document.getElementById("submit").disabled = false;
+            }
+            else {
+                document.getElementById("tishi").innerHTML="<font color='red'>两次密码不相同</font>";
+                document.getElementById("submit").disabled = true;
+            }
+        }
+    </script>
+</body>
+</html>
