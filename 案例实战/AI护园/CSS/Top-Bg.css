@@ -1,0 +1,22 @@
+.model .top {
+    width: 500px;
+    height: 600px;
+    background: url('../img/项目照片.jpg') no-repeat center top;
+    background-size: 100% 100%;
+    text-align: center;
+}
+.model .top:hover {
+    cursor: pointer;
+}
+.model .top span {
+    display: inline-block;
+    color: white;
+    font-size: 14px;
+    width: 50px;
+    padding: 4px;
+    height: 25px;
+    line-height: 25px;
+    margin: 557px 10px 10px 425px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 28px;
+}
