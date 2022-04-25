@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="李容宇">
+    <title>拼多多 新电商开创者</title>
+    <link rel="icon" href="./img/拼多多.ico">
+    <link rel="stylesheet" type="text/css" href="./CSS/Top-Bg.css">
+    <link rel="stylesheet" type="text/css" href="./CSS/Middle.css">
+    <link rel="stylesheet" type="text/css" href="./CSS/Bottom.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .model {
+            width: 500px;
+            background-color: rgb(238, 234, 234);
+            margin: 0 auto;
+            
+        }
+    </style>
+    <script src="./JS/vue-2.4.0.js"></script>
+</head>
+<body>
+    <section class="model">
+        <div class="top">
+            <span>1/6</span>
+        </div>
+        <div class="middle">
+            <div class="m1" id="app">
+                <p class="H">活动促销</p>
+                <p class="money">¥5000-7500</p>
+                <p class="content" title="微助教-智能教辅机器人">
+                    <B>微助教-智能教辅机器人</B>
+                </p>
+                <a href="#" class="feel">
+                    <img src="./img/赞.png" alt="图片加载不出来" id="zan" @click="fn1">
+                    <label for="zan">{{content1}}赞</label>
+                    <img src="./img/踩.png" alt="图片加载不出来" id="cai" @click="fn2">
+                    <label for="cai">{{content2}}踩</label>
+                </a>
+            </div>
+        </div>
+        <div class="bottom">
+            <a class="a1" href="" target="_blank" title="店铺">
+                <img src="./img/店铺.png" alt="图片加载不出来">
+                <p>店铺</p>
+            </a>
+            <a class="a1" href="#" target="_blank" title="客服">
+                <img src="./img/客服.png" alt="图片加载不出来">
+                <p>客服</p>
+            </a>
+            <a class="a1" href="#" target="_blank" title="收藏">
+                <img src="./img/收藏.png" alt="图片加载不出来">
+                <p>收藏</p>
+            </a>
+            <span>
+                <a href="#" target="_blank" style="background: linear-gradient(to right, #ffb34f,#ff9205);">加入购物车</a>
+                <a href="#" target="_blank" style="background: linear-gradient(to right, rgb(255, 123, 82),rgb(253, 65, 8));">立即购买</a>
+            </span>
+        </div>
+    </section>
+</body>
+<script src="./JS/赞.js"></script>
+</html>
