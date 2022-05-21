@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/reset.css">
+    <title>飞机大战</title>
+    <style>
+        #container {
+            width: 320px;
+            height: 568px;
+            background-image: url(./img/background.jfif);
+            position: relative;
+            margin: 0 auto;
+        }
+        #plane {
+            width: 66px;
+            height: 82px;
+            background-image: url(./img/plane.png);
+            position: absolute;
+            left: 127px;
+            top: 486px;
+        }
+        .enemy {
+            width: 38px;
+            height: 34px;
+            background-image: url(./img/brown.png);
+            position: absolute;
+            top: -34px;
+        }
+        .bullet {
+            width: 6px;
+            height: 14px;
+            background-image: url(./img/bullet1.png);
+            position: absolute;
+        }
+        #score {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+        }
+        #start, #end {
+            width: 300px;
+            background-color: rgba(137, 178, 251, 0.5);
+            position: absolute;
+            left: 50%;
+            top: 160px;
+            margin-left: -150px;
+            padding: 2rem 0;
+            z-index: 1000;
+        }
+        #start .input {
+            width: 80%;
+            margin-left: 10%;
+            height: 2rem;
+            line-height: 2rem;
+            border-bottom: 1px solid rgb(241, 234, 234);
+        }
+        input {
+            display: block;
+            width: 100%;
+            text-align: center;
+            border: 0;
+            outline: 0;
+            background-color: rgba(137, 178, 251, 0.1);
+            color: rgb(241, 234, 234);
+        }
+        input::placeholder {
+            color: rgb(241, 234, 234);
+        }
+        .but {
+            width: 80%;
+            height: 2rem;
+            line-height: 2rem;
+            text-align: center;
+            border: 1px solid rgb(241, 234, 234);
+            margin: 2rem auto 0;
+            cursor: pointer;
+            color: rgb(241, 234, 234);
+        }
+        #end {
+            display: none;
+        }
+        #end #showScore {
+            line-height: 1.6rem;
+            font-size: 1.4rem;
+            text-align: center;
+            color: rgb(241, 234, 234);
+        }
+        ul {
+            margin: 1.2rem 2rem;
+            color: rgb(241, 234, 234);
+        }
+        ul li {
+            display: flex;
+            justify-content: space-between;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="start">
+            <div class="input">
+                <input id="nick" type="text" placeholder="请输入昵称">
+            </div>
+            <div id="startBut" class="but">开始游戏</div>
+        </div>
+        <div id="end">
+            <p id="showScore">恭喜您的得分是：100</p>
+            <ul>
+                <!-- <li>
+                    <san>1.</san>
+                    <san>leo</san>
+                    <san>96</san>
+                </li> -->
+            </ul>
+            <div id="againBut" class="but">再来一次</div>
+        </div>
+        <p id="score">得分：0</p>
+        <div id="plane"></div>
+        <div id="enemy">
+            <!-- 只有管理权限，没有定位权限 -->
+            <!-- 相对于#container定位  -->
+            <!-- <div class="enemy"></div> -->
+        </div>
+        <div id="bullet">
+            <!-- <div class="bullet"></div> -->
+        </div>
+    </div>
+</body>
+<script src="./js/public.js">
+</script>
+<script>
+    // 获取标签
+    var dContainer = document.getElementById('container');
+    // 全局变量
+    var sw = 320;
+    var sh = 568;
+
+    var timer = null;
+
+    if (isPhone()) {
+        // 移动端
+        sw = window.innerWidth;
+        sh = window.innerHeight;
+    }
+    // 重新确定范围
+    dContainer.style.width = sw + 'px';
+    dContainer.style.height = sh + 'px';
+</script>
+<script src="./js/bg.js"></script>
+<script src="./js/plane.js"></script>
+<script src="./js/enemy.js"></script>
+<script src="./js/bullet.js"></script>
+<script src="./js/check.js"></script>
+<script>
+    // localStorage.clear();
+    // 获取标签
+    var dStart = document.getElementById('start');
+    var dEnd = document.getElementById('end'); 
+    var startBut = document.getElementById('startBut');
+    var againBut = document.getElementById('againBut');
+    var iptNick = document.getElementById('nick');
+    var pShowScore = document.getElementById('showScore');
+    var ul = document.querySelector('ul');
+
+    // 开始游戏 （开始计时）
+    function start() {
+        timer = setInterval(function() {
+            // （2）背景滚动
+            bgMove();
+            // （3）plane的操作
+            planeMove();
+            // （4）敌机的创建与运动
+            enemyMove();
+            // （5）子弹的创建与运动
+            bulletMove()
+            // （6）碰撞检测
+            check();
+        }, 30)
+    }
+    
+    // 游戏结束
+    function gameover() {
+        clearInterval(timer);
+        // 修改得分
+        pShowScore.innerHTML = '恭喜您的得分是：' + score;
+        // 设置排行榜
+        setPHB();
+        // 显示结束面板
+        dEnd.style.display = 'block';
+    }
+
+    // 设置排行榜
+    function setPHB() {
+        if (!localStorage.phb) {
+            // 如果缓存不存在，则为空字符串
+            localStorage.phb = "[]";
+        }
+        var arr = JSON.parse(localStorage.phb);
+        var isExit = -1;    // 昵称是否存在 ，-1表示不存在
+        for (var i=0; i<arr.length; i++) {
+            if (arr[i].nick == iptNick.value) {
+                // 用户存在
+                isExit = i;
+                break;
+            }
+        }
+        if (isExit != -1) {
+            // 更新数据
+            arr[isExit].score = score;
+        }
+        else {
+            // 将新数据放入数组
+            arr.push ({
+                nick: iptNick.value,
+                score: score
+            });
+        }
+
+        // 排序
+        arr = arr.sort(function(a,b) {
+            // 大于0，b与a交换顺序
+            return b.score-a.score;
+        })
+        
+        // 设置ul的内容
+        setUL(arr);
+
+        // 将新数据存入到
+        // 先对象话，在字符串化
+        localStorage.phb = JSON.stringify(arr);
+    }
+
+    function setUL(arr) {
+        ul.innerHTML = "";
+        for (var i=0; i<arr.length; i++) {
+            if (i>2) {
+                break;
+            }
+            var li = document.createElement('li');
+            li.innerHTML = `
+                    <san>${i+1}.</san>
+                    <san>${arr[i].nick}</san>
+                    <san>${arr[i].score}</san>
+            `;
+            ul.appendChild(li);
+        }
+    }
+
+    // 再来一次
+    function again() {
+        dEnd.style.display = 'none';
+        dStart.style.display = "block";
+    }
+    
+    startBut.onclick = function() {
+        if (iptNick.value == '') {
+            alert("昵称不能为空！");
+            return ;
+        }
+        dStart.style.display = 'none';
+        start();
+    }
+
+    againBut.onclick = function() {
+        again();
+        // 数据还原
+        dis = 0;
+        count = 0;
+        dBullet.innerHTML = "";
+        score = 0;
+        pScore.innerHTML = "得分：" + score;
+        dEnemy.innerHTML = "";
+        setPlanePosition();
+    }
+
+</script>
+</html>
